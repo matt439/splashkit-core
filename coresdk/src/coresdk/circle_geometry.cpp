@@ -172,7 +172,7 @@ namespace splashkit_lib
 
     bool tangent_points(const point_2d &from_pt, const circle &c, point_2d &p1, point_2d &p2)
     {
-        vector_2d pm_c = vector_point_to_point(from_pt, c.center);
+        vector_2d pm_c = vector_point_to_point(c.center, from_pt);
 
         double sqr_len = vector_magnitude_squared(pm_c);
         double r_sqr = c.radius * c.radius;
@@ -185,10 +185,10 @@ namespace splashkit_lib
         double inv_sqr_len = 1.0 / sqr_len;
         double root = sqrt(abs(sqr_len - r_sqr));
 
-        p1.x = c.center.x + c.radius * (c.radius * pm_c.x - pm_c.y * root) * inv_sqr_len;
-        p1.y = c.center.y + c.radius * (c.radius * pm_c.y + pm_c.x * root) * inv_sqr_len;
-        p2.x = c.center.x + c.radius * (c.radius * pm_c.x + pm_c.y * root) * inv_sqr_len;
-        p2.y = c.center.y + c.radius * (c.radius * pm_c.y - pm_c.x * root) * inv_sqr_len;
+        p1.x = c.center.x + c.radius * (c.radius * pm_c.x + pm_c.y * root) * inv_sqr_len;
+        p1.y = c.center.y + c.radius * (c.radius * pm_c.y - pm_c.x * root) * inv_sqr_len;
+        p2.x = c.center.x + c.radius * (c.radius * pm_c.x - pm_c.y * root) * inv_sqr_len;
+        p2.y = c.center.y + c.radius * (c.radius * pm_c.y + pm_c.x * root) * inv_sqr_len;
 
         return true;
     }
